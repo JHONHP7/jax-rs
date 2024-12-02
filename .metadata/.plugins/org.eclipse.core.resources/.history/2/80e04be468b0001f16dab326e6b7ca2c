@@ -1,0 +1,38 @@
+package com.devweb.energia.dao;
+
+import com.devweb.energia.model.Cliente;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+public class ClienteDAO {
+
+	private List<Cliente> clientes;
+
+	public ClienteDAO() {
+		this.clientes = new ArrayList<>();
+	}
+
+	public List<Cliente> findAll() {
+		return new ArrayList<>(clientes); // Retorna uma cópia da lista
+	}
+
+	public void save(Cliente cliente) {
+		clientes.add(cliente);
+	}
+
+	public void update(String cpf, Cliente clienteAtualizado) {
+		Optional<Cliente> clienteExistente = clientes.stream().filter(cliente -> cliente.getCpf().equals(cpf))
+				.findFirst();
+
+		clienteExistente.ifPresent(cliente -> {
+			cliente.setNome(clienteAtualizado.getNome());
+			cliente.setEndereco(clienteAtualizado.getEndereco());
+		});
+	}
+
+	public void delete(String cpf) {
+		clientes.removeIf(cliente -> cliente.getCpf().equals(cpf));
+	}
+}

@@ -1,0 +1,42 @@
+package com.devweb.energia.service;
+
+import java.util.List;
+
+import com.devweb.energia.dao.ClienteDAO;
+import com.devweb.energia.model.Cliente;
+
+public class EmpresaLuzService {
+
+    private ClienteDAO clienteDAO;
+
+    public EmpresaLuzService() {
+        this.clienteDAO = new ClienteDAO();
+    }
+
+    public List<Cliente> listarClientes() {
+        return clienteDAO.findAll();
+    }
+
+    public boolean adicionarCliente(Cliente cliente) {
+        // Verificar se o cliente já existe (pode ser por CPF)
+        for (Cliente c : clienteDAO.findAll()) {
+            if (c.getCpf().equals(cliente.getCpf())) {
+                return false; // Cliente já existe, não cadastramos
+            }
+        }
+        clienteDAO.save(cliente); // Se não existir, salva o cliente
+        return true; // Cliente adicionado com sucesso
+    }
+
+    public void atualizarCliente(String cpf, Cliente cliente) {
+        clienteDAO.update(cpf, cliente);
+    }
+
+    public void removerCliente(String cpf) {
+        clienteDAO.delete(cpf);
+    }
+
+	public List<Cliente> buscarPorNome(String nome) {
+        return clienteDAO.findByName(nome);
+    }
+}

@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3908765045.index
+2501795041.index
+264842102.index
+4260523604.index
+2028946863.index
+1992459186.index

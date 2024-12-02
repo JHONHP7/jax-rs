@@ -1,0 +1,47 @@
+package com.devweb.energia.dao;
+
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import com.devweb.energia.model.Cliente;
+
+public class ClienteDAO {
+
+    @PersistenceContext
+    private EntityManager em;
+
+    // Criar cliente
+    @Transactional
+    public void create(Cliente cliente) {
+        em.persist(cliente);
+    }
+
+    // Buscar cliente por CPF
+    public Cliente findByCpf(String cpf) {
+        return em.find(Cliente.class, cpf);
+    }
+
+    // Atualizar cliente
+    @Transactional
+    public void update(Cliente cliente) {
+        em.merge(cliente);
+    }
+
+    // Deletar cliente
+    @Transactional
+    public void delete(String cpf) {
+        Cliente cliente = findByCpf(cpf);
+        if (cliente != null) {
+            em.remove(cliente);
+        }
+    }
+
+    // Listar todos os clientes
+    public List<Cliente> findAll() {
+        return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
+    }
+}

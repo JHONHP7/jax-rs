@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2683515335.index
+/energia/src/main/java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2391269949.index
+/jax_rs/src/main/java

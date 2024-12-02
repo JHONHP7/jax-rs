@@ -1,0 +1,20 @@
+package com.devweb.energia.resource;
+
+import com.devweb.energia.model.Cliente;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+@Path("/cliente")
+public class ClienteResource {
+
+	Cliente cliente = new Cliente(1L, "jhonatan", 11);
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Cliente getCliente() {
+		return cliente;
+	}
+}

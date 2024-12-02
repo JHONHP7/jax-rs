@@ -1,0 +1,13 @@
+package com.devweb.energia.resource;
+
+import com.devweb.energia.model.Cliente;
+
+import jakarta.ws.rs.Path;
+
+@Path("/cliente")
+public class ClienteResource {
+
+	Cliente cliente = new Cliente(1L, "jhonatan", 11); 
+	
+	
+}

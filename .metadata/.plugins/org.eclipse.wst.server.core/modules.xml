@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+  <module moduleId="org.eclipse.jst.jee.server:jax_rs" serverId="apache-tomcat-10.1.19 at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:energia" serverId="apache-tomcat-10.1.19 at localhost"/>
+</modules>

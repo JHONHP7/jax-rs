@@ -1,0 +1,31 @@
+package com.devweb.energia.service;
+
+import java.util.List;
+
+import com.devweb.energia.dao.ClienteDAO;
+import com.devweb.energia.model.Cliente;
+
+public class EmpresaLuzService {
+
+    private ClienteDAO clienteDAO;
+
+    public EmpresaLuzService() {
+        this.clienteDAO = new ClienteDAO(); // Instância manual
+    }
+
+    public List<Cliente> listarClientes() {
+        return clienteDAO.findAll();
+    }
+
+    public void adicionarCliente(Cliente cliente) {
+        clienteDAO.save(cliente);
+    }
+
+    public void atualizarCliente(String cpf, Cliente cliente) {
+        clienteDAO.update(cpf, cliente);
+    }
+
+    public void removerCliente(String cpf) {
+        clienteDAO.delete(cpf);
+    }
+}

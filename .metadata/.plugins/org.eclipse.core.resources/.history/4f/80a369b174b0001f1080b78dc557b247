@@ -1,0 +1,37 @@
+package com.devweb.energia.model;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class ClienteVital extends Cliente {
+
+	private Integer tempoMaxSemEnergia;
+	private Integer codigoPrioridade;
+
+	public ClienteVital(Integer tempoMaxSemEnergia, Integer codigoPrioridade) {
+		super();
+		this.tempoMaxSemEnergia = tempoMaxSemEnergia;
+		this.codigoPrioridade = codigoPrioridade;
+	}
+
+	public Integer getTempoMaxSemEnergia() {
+		return tempoMaxSemEnergia;
+	}
+
+	public void setTempoMaxSemEnergia(Integer tempoMaxSemEnergia) {
+		this.tempoMaxSemEnergia = tempoMaxSemEnergia;
+	}
+
+	public Integer getCodigoPrioridade() {
+		return codigoPrioridade;
+	}
+
+	public void setCodigoPrioridade(Integer codigoPrioridade) {
+		this.codigoPrioridade = codigoPrioridade;
+	}
+
+	public ClienteVital() {
+		super();
+	}
+
+}

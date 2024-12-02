@@ -1,0 +1,53 @@
+package com.devweb.energia.model;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+public class Cliente {
+    private String cpf;
+    private String nome;
+    private String endereco;
+    private Integer tempoMaxSemEnergia;
+    private Integer codigoPrioridade; // De 1 a 3, para clientes vitais
+
+    // Getters and Setters
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public Integer getTempoMaxSemEnergia() {
+        return tempoMaxSemEnergia;
+    }
+
+    public void setTempoMaxSemEnergia(Integer tempoMaxSemEnergia) {
+        this.tempoMaxSemEnergia = tempoMaxSemEnergia;
+    }
+
+    public Integer getCodigoPrioridade() {
+        return codigoPrioridade;
+    }
+
+    public void setCodigoPrioridade(Integer codigoPrioridade) {
+        this.codigoPrioridade = codigoPrioridade;
+    }
+}

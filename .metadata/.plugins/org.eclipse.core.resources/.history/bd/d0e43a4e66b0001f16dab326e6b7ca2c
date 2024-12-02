@@ -1,0 +1,9 @@
+package com.devweb.energia.resource;
+
+import jakarta.ws.rs.Path;
+
+@Path("/cliente")
+public class ClienteResource {
+
+
+}

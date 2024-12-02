@@ -1,0 +1,112 @@
+package com.devweb.energia.resource;
+
+import java.util.List;
+
+import com.devweb.energia.model.Cliente;
+import com.devweb.energia.model.ClienteVital;
+import com.devweb.energia.service.EmpresaLuzService;
+
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.MatrixParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
+@Path("/clientes")
+public class ClienteResource {
+	
+	private EmpresaLuzService empresaLuzService = new EmpresaLuzService();
+
+	// GET: Listar todos os clientes
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+	public Response getAllClientes() {
+		List<Cliente> clientes = empresaLuzService.getAllClientes();
+		return Response.ok(clientes).build();
+	}
+
+	// GET: Buscar cliente por CPF usando @PathParam
+	@GET
+	@Path("/{cpf}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+	public Response getClienteByCpf(@PathParam("cpf") String cpf) {
+		Cliente cliente = empresaLuzService.getClienteByCpf(cpf);
+		if (cliente == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("Cliente não encontrado").build();
+		}
+		return Response.ok(cliente).build();
+	}
+
+	// POST: Criar novo cliente usando @FormParam
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response createCliente(@FormParam("cpf") String cpf, @FormParam("nome") String nome,
+			@FormParam("endereco") String endereco,
+			@FormParam("tempoMaxSemEnergia") @DefaultValue("0") Integer tempoMaxSemEnergia,
+			@FormParam("codigoPrioridade") @DefaultValue("0") Integer codigoPrioridade) {
+
+		Cliente cliente;
+		if (codigoPrioridade > 0) { // Cliente Vital
+			cliente = new ClienteVital();
+			((ClienteVital) cliente).setTempoMaxSemEnergia(tempoMaxSemEnergia);
+			((ClienteVital) cliente).setCodigoPrioridade(codigoPrioridade);
+		} else {
+			cliente = new Cliente();
+		}
+
+		cliente.setCpf(cpf);
+		cliente.setNome(nome);
+		cliente.setEndereco(endereco);
+		empresaLuzService.createCliente(cliente);
+
+		return Response.status(Response.Status.CREATED).entity("Cliente criado com sucesso").build();
+	}
+
+	// PUT: Atualizar cliente usando @MatrixParam
+	@PUT
+	@Path("/{cpf}")
+	public Response updateCliente(@PathParam("cpf") String cpf, @MatrixParam("nome") String nome,
+			@MatrixParam("endereco") String endereco, @MatrixParam("tempoMaxSemEnergia") Integer tempoMaxSemEnergia,
+			@MatrixParam("codigoPrioridade") Integer codigoPrioridade) {
+
+		Cliente cliente = empresaLuzService.getClienteByCpf(cpf);
+		if (cliente == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("Cliente não encontrado").build();
+		}
+
+		cliente.setNome(nome);
+		cliente.setEndereco(endereco);
+
+		if (cliente instanceof ClienteVital) {
+			ClienteVital clienteVital = (ClienteVital) cliente;
+			clienteVital.setTempoMaxSemEnergia(tempoMaxSemEnergia);
+			clienteVital.setCodigoPrioridade(codigoPrioridade);
+		}
+
+		empresaLuzService.updateCliente(cliente);
+		return Response.ok("Cliente atualizado com sucesso").build();
+	}
+
+	// DELETE: Deletar cliente usando @QueryParam
+	@DELETE
+	public Response deleteCliente(@QueryParam("cpf") String cpf) {
+		Cliente cliente = empresaLuzService.getClienteByCpf(cpf);
+		if (cliente == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("Cliente não encontrado").build();
+		}
+
+		empresaLuzService.deleteCliente(cpf);
+		return Response.ok("Cliente deletado com sucesso").build();
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.devweb.energia.model;
+
+public class ClienteVital {
+
+}
