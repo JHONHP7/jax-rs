@@ -1,44 +1,54 @@
 package com.devweb.energia.resource;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import com.devweb.energia.model.Terceirizada;
 import com.devweb.energia.service.EmpresaLuzService;
 
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import java.util.List;
-
 @Path("/terceirizadas")
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class TerceirizadaResource {
 
-	private EmpresaLuzService empresaLuzService = new EmpresaLuzService();
+	private EmpresaLuzService service = new EmpresaLuzService();
 
 	@GET
-	public Response listarTerceirizadas() {
-		List<Terceirizada> terceirizadas = empresaLuzService.listarTerceirizadas();
-		return Response.ok(terceirizadas).build();
+	public Response getAllTerceirizadas() {
+		return Response.ok(service.getAllTerceirizadas()).build();
+	}
+
+	@GET
+	@Path("/{id}")
+	public Response getTerceirizadaById(@PathParam("id") Long id) {
+		return Response.ok(service.getTerceirizadaById(id)).build();
 	}
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response adicionarTerceirizada(Terceirizada terceirizada) {
-		empresaLuzService.adicionarTerceirizada(terceirizada);
+	public Response createTerceirizada(Terceirizada terceirizada) {
+		service.createTerceirizada(terceirizada);
 		return Response.status(Response.Status.CREATED).build();
 	}
 
 	@PUT
-	@Path("/{codigo}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response atualizarTerceirizada(@PathParam("codigo") String codigo, Terceirizada terceirizada) {
-		empresaLuzService.atualizarTerceirizada(codigo, terceirizada);
+	@Path("/{id}")
+	public Response updateTerceirizada(@PathParam("id") Long id, Terceirizada terceirizada) {
+		service.updateTerceirizada(id, terceirizada);
 		return Response.ok().build();
 	}
 
 	@DELETE
-	@Path("/{codigo}")
-	public Response removerTerceirizada(@PathParam("codigo") String codigo) {
-		empresaLuzService.removerTerceirizada(codigo);
+	@Path("/{id}")
+	public Response deleteTerceirizada(@PathParam("id") Long id) {
+		service.deleteTerceirizada(id);
 		return Response.noContent().build();
 	}
 }

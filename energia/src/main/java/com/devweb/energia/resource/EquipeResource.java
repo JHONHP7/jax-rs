@@ -1,44 +1,54 @@
 package com.devweb.energia.resource;
 
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import com.devweb.energia.model.Equipe;
 import com.devweb.energia.service.EmpresaLuzService;
 
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import java.util.List;
-
 @Path("/equipes")
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN })
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class EquipeResource {
 
-	private EmpresaLuzService empresaLuzService = new EmpresaLuzService();
+	private EmpresaLuzService service = new EmpresaLuzService();
 
 	@GET
-	public Response listarEquipes() {
-		List<Equipe> equipes = empresaLuzService.listarEquipes();
-		return Response.ok(equipes).build();
+	public Response getAllEquipes() {
+		return Response.ok(service.getAllEquipes()).build();
+	}
+
+	@GET
+	@Path("/{id}")
+	public Response getEquipeById(@PathParam("id") Long id) {
+		return Response.ok(service.getEquipeById(id)).build();
 	}
 
 	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response adicionarEquipe(Equipe equipe) {
-		empresaLuzService.adicionarEquipe(equipe);
+	public Response createEquipe(Equipe equipe) {
+		service.createEquipe(equipe);
 		return Response.status(Response.Status.CREATED).build();
 	}
 
 	@PUT
-	@Path("/{codigo}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response atualizarEquipe(@PathParam("codigo") String codigo, Equipe equipe) {
-		empresaLuzService.atualizarEquipe(codigo, equipe);
+	@Path("/{id}")
+	public Response updateEquipe(@PathParam("id") Long id, Equipe equipe) {
+		service.updateEquipe(id, equipe);
 		return Response.ok().build();
 	}
 
 	@DELETE
-	@Path("/{codigo}")
-	public Response removerEquipe(@PathParam("codigo") String codigo) {
-		empresaLuzService.removerEquipe(codigo);
+	@Path("/{id}")
+	public Response deleteEquipe(@PathParam("id") Long id) {
+		service.deleteEquipe(id);
 		return Response.noContent().build();
 	}
 }

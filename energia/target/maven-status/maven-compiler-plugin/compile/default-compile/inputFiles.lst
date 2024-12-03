@@ -1,0 +1,17 @@
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/model/OS.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/resource/OSResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/resource/TerceirizadaResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/dao/OSDAO.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/model/Cliente.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/model/Equipe.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/dao/TerceirizadaDAO.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/dao/EquipeDAO.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/dao/ClienteVitalDAO.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/model/Terceirizada.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/resource/ClienteResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/resource/ClienteVitalResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/MyResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/resource/EquipeResource.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/model/ClienteVital.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/dao/ClienteDAO.java
+/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia/src/main/java/com/devweb/energia/service/EmpresaLuzService.java

@@ -2,8 +2,8 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
-			<item value="/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia"/>
 			<item value="/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais"/>
+			<item value="/home/jhonatan-silva/faculdade/devweb-avancado/Atividadeees_semanais/energia"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -27,10 +27,15 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="br.uff.devweb.energia_empresa"/>
+			<item value="br.uff.devweb.empresa_energia"/>
 		</list>
 		<list key="groupId">
+			<item value="br.uff.devweb"/>
 		</list>
 		<list key="artifactId">
+			<item value="energia-empresa"/>
+			<item value="empresa-energia"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

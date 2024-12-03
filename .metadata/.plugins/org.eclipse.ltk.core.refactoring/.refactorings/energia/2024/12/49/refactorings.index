@@ -1,2 +1,10 @@
 1733108815116	Move compilation unit
 1733115996633	Delete element
+1733153261048	Delete element
+1733157153138	Rename type 'OrderServico'
+1733157165823	Rename compilation unit 'OrdermServico.java'
+1733159523153	Move compilation unit
+1733160364312	Rename type 'OSResource'
+1733164293695	Move 'persistence.xml' to 'resources'
+1733164304900	Move 'persistence.xml' to 'META-INF'
+1733165278105	Delete element

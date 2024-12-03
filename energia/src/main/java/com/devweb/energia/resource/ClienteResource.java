@@ -1,7 +1,5 @@
 package com.devweb.energia.resource;
 
-import java.util.List;
-
 import com.devweb.energia.model.Cliente;
 import com.devweb.energia.service.EmpresaLuzService;
 
@@ -13,64 +11,45 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+
 @Path("/clientes")
-@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
+@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class ClienteResource {
 
-    private EmpresaLuzService empresaLuzService = new EmpresaLuzService(); // Instância manual
+	private EmpresaLuzService service = new EmpresaLuzService();
 
-    @GET
-    public Response listarClientes() {
-        List<Cliente> clientes = empresaLuzService.listarClientes();
-        return Response.ok(clientes).build();
-    }
+	@GET
+	public Response getAllClientes() {
+		return Response.ok(service.getAllClientes()).build();
+	}
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response adicionarCliente(Cliente cliente) {
-        boolean sucesso = empresaLuzService.adicionarCliente(cliente);
-        
-        if (sucesso) {
-            return Response.status(Response.Status.CREATED)
-                           .entity("Cliente cadastrado com sucesso!") // Mensagem de sucesso
-                           .build();
-        } else {
-            return Response.status(Response.Status.BAD_REQUEST)
-                           .entity("Falha ao cadastrar cliente!") // Mensagem de falha
-                           .build();
-        }
-    }
+	@GET
+	@Path("/{id}")
+	public Response getClienteById(@PathParam("id") Long id) {
+		return Response.ok(service.getClienteById(id)).build();
+	}
 
+	@POST
+	public Response createCliente(Cliente cliente) {
+		service.createCliente(cliente);
+		return Response.status(Response.Status.CREATED).build();
+	}
 
-    @PUT
-    @Path("/{cpf}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response atualizarCliente(@PathParam("cpf") String cpf, Cliente cliente) {
-        empresaLuzService.atualizarCliente(cpf, cliente);
-        return Response.ok().build();
-    }
+	@PUT
+	@Path("/{id}")
+	public Response updateCliente(@PathParam("id") Long id, Cliente cliente) {
+		service.updateCliente(id, cliente);
+		return Response.ok().build();
+	}
 
-    @DELETE
-    @Path("/{cpf}")
-    public Response removerCliente(@PathParam("cpf") String cpf) {
-        empresaLuzService.removerCliente(cpf);
-        return Response.noContent().build();
-    }
-    
-    @GET
-    @Path("/buscar")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML, MediaType.TEXT_PLAIN})
-    public Response buscarClientePorNome(@QueryParam("nome") String nome) {
-        List<Cliente> clientes = empresaLuzService.buscarPorNome(nome);
-        if (clientes.isEmpty()) {
-            return Response.status(Response.Status.NO_CONTENT).entity("Nenhum cliente encontrado com o nome: " + nome).build();
-        }
-        return Response.ok(clientes).build();
-    }
-
+	@DELETE
+	@Path("/{id}")
+	public Response deleteCliente(@PathParam("id") Long id) {
+		service.deleteCliente(id);
+		return Response.noContent().build();
+	}
 }

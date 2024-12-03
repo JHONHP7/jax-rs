@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+    <persistence-unit name="energiaPU"
+        transaction-type="JTA">
+        <jta-data-source>jdbc/energiaDS</jta-data-source>
+        <!-- Defina as classes de entidade aqui -->
+        <class>com.devweb.energia.model.Cliente</class>
+        <class>com.devweb.energia.model.ClienteVital</class>
+        <class>com.devweb.energia.model.Equipe</class>
+        <class>com.devweb.energia.model.OrdemServico</class>
+        <class>com.devweb.energia.model.Terceirizada</class>
+        <!-- Adicione suas outras entidades aqui -->
+        <properties>
+            <property name="hibernate.dialect"
+                value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.transaction.jta.platform"
+                value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
+            <property name="hibernate.transaction.factory_class"
+                value="org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory" />
+
+            <!-- Configurações de conexão com o banco de dados -->
+            <property name="hibernate.connection.url"
+                value="jdbc:postgresql://localhost:5432/energia" />
+            <property name="hibernate.connection.username"
+                value="postgres" />
+            <property name="hibernate.connection.password" value="1996" />
+            <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="20" />
+            <property name="hibernate.c3p0.timeout" value="300" />
+        </properties>
+    </persistence-unit>
+</persistence>
