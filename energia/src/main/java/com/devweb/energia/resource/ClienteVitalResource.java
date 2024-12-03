@@ -3,52 +3,31 @@ package com.devweb.energia.resource;
 import com.devweb.energia.model.ClienteVital;
 import com.devweb.energia.service.EmpresaLuzService;
 
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
+/**
+ * Recurso para gerenciamento de clientes vitais.
+ */
 @Path("/clientes-vitais")
-@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 public class ClienteVitalResource {
 
-	private EmpresaLuzService service = new EmpresaLuzService();
+	private final EmpresaLuzService service = new EmpresaLuzService();
 
-	@GET
-	public Response getAllClientesVitais() {
-		return Response.ok(service.getAllClientesVitais()).build();
-	}
-
-	@GET
-	@Path("/{id}")
-	public Response getClienteVitalById(@PathParam("id") Long id) {
-		return Response.ok(service.getClienteVitalById(id)).build();
-	}
-
-	@POST
-	public Response createClienteVital(ClienteVital clienteVital) {
-		service.createClienteVital(clienteVital);
-		return Response.status(Response.Status.CREATED).build();
-	}
-
+	/**
+	 * Atualiza um cliente vital usando parâmetros de matrix.
+	 *
+	 * @param id                 o ID do cliente vital.
+	 * @param tempoMaxSemEnergia o tempo máximo sem energia.
+	 * @return resposta de sucesso.
+	 */
 	@PUT
 	@Path("/{id}")
-	public Response updateClienteVital(@PathParam("id") Long id, ClienteVital clienteVital) {
+	public Response updateClienteVital(@PathParam("id") Long id,
+			@MatrixParam("tempoMaxSemEnergia") int tempoMaxSemEnergia) {
+		ClienteVital clienteVital = service.getClienteVitalById(id);
+		clienteVital.setTempoMaximoSemEnergia(tempoMaxSemEnergia);
 		service.updateClienteVital(id, clienteVital);
 		return Response.ok().build();
-	}
-
-	@DELETE
-	@Path("/{id}")
-	public Response deleteClienteVital(@PathParam("id") Long id) {
-		service.deleteClienteVital(id);
-		return Response.noContent().build();
 	}
 }

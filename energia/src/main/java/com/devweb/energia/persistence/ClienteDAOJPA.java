@@ -1,20 +1,17 @@
 package com.devweb.energia.persistence;
 
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import com.devweb.energia.dao.ClienteDAO;
 import com.devweb.energia.model.Cliente;
 import com.devweb.energia.util.UtilJPA;
 
-public class ClienteDAOJPA implements ClienteDAO {
+public class ClienteDAOJPA {
 
     private EntityManager em;
 
-    @Override
     public List<Cliente> findAll() {
         em = UtilJPA.getEm();
         List<Cliente> clientes = em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
@@ -22,17 +19,6 @@ public class ClienteDAOJPA implements ClienteDAO {
         return clientes;
     }
 
-    @Override
-    public void update(Cliente cliente) {
-        em = UtilJPA.getEm();
-        EntityTransaction et = em.getTransaction();
-        et.begin();
-        em.merge(cliente);
-        et.commit();
-        em.close();
-    }
-
-    @Override
     public void delete(Long id) {
         em = UtilJPA.getEm();
         EntityTransaction et = em.getTransaction();
@@ -59,25 +45,12 @@ public class ClienteDAOJPA implements ClienteDAO {
         return cliente;
     }
 
-    @Override
-    public Cliente findByCpf(String cpf) {
+    public void update(Cliente cliente) {
         em = UtilJPA.getEm();
-        Cliente cliente = em.createQuery("SELECT c FROM Cliente c WHERE c.cpf = :cpf", Cliente.class)
-                .setParameter("cpf", cpf)
-                .getSingleResult();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        em.merge(cliente);
+        et.commit();
         em.close();
-        return cliente;
     }
-
-    @Override
-    public List<Cliente> findByName(String name) {
-        em = UtilJPA.getEm();
-        List<Cliente> clientes = em.createQuery("SELECT c FROM Cliente c WHERE c.nome = :name", Cliente.class)
-                .setParameter("name", name)
-                .getResultList();
-        em.close();
-        return clientes;
-    }
-
-
 }
